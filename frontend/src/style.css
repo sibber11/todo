@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@source "./**/*.js";
+@source "./**/*.vue";
+
+body {
+  @apply bg-slate-50 text-slate-900;
+}
