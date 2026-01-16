@@ -55,7 +55,8 @@ app.put("/api/projects/:id", auth, async (req, res) => {
   await db("projects")
     .where({ id: req.params.id, user_id: req.user.id })
     .update({ name });
-  res.json({ success: true });
+  const project = await db("projects").where({ id: req.params.id }).first();
+  res.json(project);
 });
 
 app.delete("/api/projects/:id", auth, async (req, res) => {

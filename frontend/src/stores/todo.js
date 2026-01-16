@@ -20,6 +20,13 @@ export const useTodoStore = defineStore("todo", {
       this.projects.push(res.data);
       this.currentProjectId = res.data.id;
     },
+    async updateProject(id, name) {
+      const res = await api.put(`/projects/${id}`, { name });
+      const index = this.projects.findIndex((p) => p.id === id);
+      if (index !== -1) {
+        Object.assign(this.projects[index], res.data);
+      }
+    },
     async deleteProject(id) {
       await api.delete(`/projects/${id}`);
       this.projects = this.projects.filter((p) => p.id !== id);
@@ -48,6 +55,10 @@ export const useTodoStore = defineStore("todo", {
     async toggleTodo(id, completed) {
       await api.put(`/todos/${id}`, { completed });
       await this.fetchTodos(); // Refresh for sorting
+    },
+    async updateTodo(id, data) {
+      await api.put(`/todos/${id}`, data);
+      await this.fetchTodos(); // Refresh to get updated data
     },
     async deleteTodo(id) {
       await api.delete(`/todos/${id}`);
