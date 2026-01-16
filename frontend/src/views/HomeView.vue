@@ -558,7 +558,10 @@ const priorityClass = (p) => {
 
 const formatDate = (date) => {
   if (!date) return "";
-  return new Date(date).toLocaleDateString(undefined, {
+  // Assume UTC if string lacks timezone info
+  const dateString =
+    typeof date === "string" && !date.endsWith("Z") ? date + "Z" : date;
+  return new Date(dateString).toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -567,7 +570,10 @@ const formatDate = (date) => {
 
 const formatDateTime = (date) => {
   if (!date) return "";
-  const d = new Date(date);
+  // Assume UTC if string lacks timezone info
+  const dateString =
+    typeof date === "string" && !date.endsWith("Z") ? date + "Z" : date;
+  const d = new Date(dateString);
   return (
     d.toLocaleDateString(undefined, {
       month: "short",

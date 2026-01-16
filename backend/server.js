@@ -6,6 +6,9 @@ const db = require("./db");
 const auth = require("./middleware/auth");
 require("dotenv").config();
 
+// Set timezone to Asia/Dhaka
+process.env.TZ = "Asia/Dhaka";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
