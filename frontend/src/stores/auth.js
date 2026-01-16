@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/backend/api",
+  baseURL: "/api",
 });
 
 export const useAuthStore = defineStore("auth", {
